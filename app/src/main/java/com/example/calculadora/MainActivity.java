@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView visor;
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Button multiplica;
     Button dividir;
     Button igual;
-
+    Button coma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         multiplica = findViewById(R.id.buttonpor);
         dividir = findViewById(R.id.buttondividir);
         igual = findViewById(R.id.buttonigual);
+        coma = findViewById(R.id.buttoncoma);
     }
 
     public void igual(View view){
@@ -72,9 +76,25 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         estadoActual = "num1";
-        num1 = Double.parseDouble(visor.getText().toString());
+        num1 = respuesta;
         num2 = 0;
         visor.setText(String.valueOf(respuesta));
+    }
+    public void colocarDecimal(View view){
+        String datoPantalla = visor.getText().toString();
+
+        Pattern patron = Pattern.compile("[0-9]+");
+        Matcher matcher = patron.matcher(datoPantalla);
+
+        if(matcher.matches()){
+            if(estadoActual.equals("num1")){
+                datoPantalla = datoPantalla + ".";
+            } else if (estadoActual.equals("num2")) {
+                datoPantalla = datoPantalla + ".";
+            }
+        }
+
+        visor.setText(datoPantalla);
     }
     public void sumar(View view){
         operacion = suma.getText().toString();

@@ -24,6 +24,7 @@
         android:layout_width="105dp"
         android:layout_height="51dp"
         android:layout_marginStart="11dp"
+        android:onClick="colocarDecimal"
         android:text=","
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
